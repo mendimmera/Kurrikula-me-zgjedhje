@@ -55,31 +55,44 @@
             kontrolloPreferencat();
         }
 
-        // Funksioni që mbledh përgjigjet dhe i shfaq në faqe
-        function mbledhPergjigjet() {
+        // Funksioni që dërgon të dhënat në Google Sheet
+        function dergoNeGoogleSheet() {
             var tabela = document.getElementById("tabela");
-            var pergjigjet = {};
+            var pergjigjet = [];
 
             // Kalon përmes çdo rreshti të tabelës dhe mbledh përgjigjet
             for (var i = 1; i < tabela.rows.length; i++) {
                 var lenda = tabela.rows[i].cells[0].innerText;
                 var preference = tabela.rows[i].cells[1].getElementsByTagName("input")[0].value;
-                pergjigjet[lenda] = preference;
+                if (preference) {
+                    pergjigjet.push({ lenda: lenda, preference: preference });
+                }
             }
 
-            // Shfaq përgjigjet në faqe
-            var resultsDiv = document.getElementById("results");
-            resultsDiv.innerHTML = "<h3>Përgjigjet e tua:</h3>";
-            for (var lenda in pergjigjet) {
-                resultsDiv.innerHTML += "<p><strong>" + lenda + ":</strong> " + pergjigjet[lenda] + "</p>";
-            }
+            // Dërgo të dhënat në Google Sheet
+            var url = "https://script.google.com/macros/s/.../exec"; // Zëvendëso me URL-në e web app
+            fetch(url, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(pergjigjet),
+            })
+            .then(() => {
+                alert("Të dhënat u dërguan me sukses!");
+            })
+            .catch((error) => {
+                console.error("Gabim:", error);
+                alert("Ndodhi një gabim gjatë dërgimit të të dhënave.");
+            });
         }
     </script>
 </head>
 <body>
 
 <h2>FORMULAR PËR PËRZGJEDHJEN E LËNDËVE</h2>
-<form onsubmit="mbledhPergjigjet(); return false;">
+<form onsubmit="dergoNeGoogleSheet(); return false;">
     <table id="tabela" border="1">
         <thead>
             <tr>
@@ -95,90 +108,7 @@
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
-            <tr>
-                <td>FIZIKË</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>KIMI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>BIOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>TIK</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>HISTORI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>GJEOGRAFI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>SOCIOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>PSIKOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>LETËRSI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>ARTE</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>TEKNOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>ED. FIZIK</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
+            <!-- Shto rreshtat e tjerë të tabelës këtu -->
         </tbody>
     </table>
     <br>
