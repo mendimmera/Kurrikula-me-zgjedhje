@@ -10,12 +10,6 @@
             font-size: 12px;
             display: none; /* Fillimisht i fshehur */
         }
-        .results {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
     </style>
     <script>
         // Funksioni që kontrollon preferencat dhe shfaq gabime menjëherë
@@ -54,45 +48,12 @@
         function kontrolloInput(e) {
             kontrolloPreferencat();
         }
-
-        // Funksioni që dërgon të dhënat në Google Sheet
-        function dergoNeGoogleSheet() {
-            var tabela = document.getElementById("tabela");
-            var pergjigjet = [];
-
-            // Kalon përmes çdo rreshti të tabelës dhe mbledh përgjigjet
-            for (var i = 1; i < tabela.rows.length; i++) {
-                var lenda = tabela.rows[i].cells[0].innerText;
-                var preference = tabela.rows[i].cells[1].getElementsByTagName("input")[0].value;
-                if (preference) {
-                    pergjigjet.push({ lenda: lenda, preference: preference });
-                }
-            }
-
-            // Dërgo të dhënat në Google Sheet
-            var url = https://script.google.com/macros/s/AKfycbwa0luW9ymJkjuXBMlSGGcfbcuxrDJaj_gPWKWOx6lDsuuy7hibC3QmeHmPaA5aQyKsHA/exec;
-            fetch(url, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(pergjigjet),
-            })
-            .then(() => {
-                alert("Të dhënat u dërguan me sukses!");
-            })
-            .catch((error) => {
-                console.error("Gabim:", error);
-                alert("Ndodhi një gabim gjatë dërgimit të të dhënave.");
-            });
-        }
     </script>
 </head>
 <body>
 
 <h2>FORMULAR PËR PËRZGJEDHJEN E LËNDËVE</h2>
-<form onsubmit="dergoNeGoogleSheet(); return false;">
+<form>
     <table id="tabela" border="1">
         <thead>
             <tr>
@@ -108,14 +69,95 @@
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
-            <!-- Shto rreshtat e tjerë të tabelës këtu -->
+            <tr>
+                <td>FIZIKË</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>KIMI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>BIOLOGJI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>TIK</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>HISTORI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>GJEOGRAFI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>SOCIOLOGJI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>PSIKOLOGJI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>LETËRSI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>ARTE</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>TEKNOLOGJI</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>ED. FIZIK</td>
+                <td>
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
+                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <br>
-    <button type="submit">DËRGO</button>
+    <button type="submit" onclick="return kontrolloPreferencat()">DËRGO</button>
 </form>
-
-<div id="results" class="results"></div>
-
+<iframe aria-label='Lendet' frameborder="0" style="height:500px;width:99%;border:none;" src='https://forms.zohopublic.eu/mendimmeragm1/form/Lendet/formperma/iaKOR_Tra6YVBkXam9Xa7O0pFdOdCv5vZOF6r4MWmco'></iframe>
 </body>
 </html>
