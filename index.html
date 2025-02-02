@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,12 @@
             color: red;
             font-size: 12px;
             display: none; /* Fillimisht i fshehur */
+        }
+        .results {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
         }
     </style>
     <script>
@@ -48,123 +54,138 @@
         function kontrolloInput(e) {
             kontrolloPreferencat();
         }
+
+        // Funksioni që mbledh përgjigjet dhe i shfaq në faqe
+        function mbledhPergjigjet() {
+            var tabela = document.getElementById("tabela");
+            var pergjigjet = {};
+
+            // Kalon përmes çdo rreshti të tabelës dhe mbledh përgjigjet
+            for (var i = 1; i < tabela.rows.length; i++) {
+                var lenda = tabela.rows[i].cells[0].innerText;
+                var preference = tabela.rows[i].cells[1].getElementsByTagName("input")[0].value;
+                pergjigjet[lenda] = preference;
+            }
+
+            // Shfaq përgjigjet në faqe
+            var resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "<h3>Përgjigjet e tua:</h3>";
+            for (var lenda in pergjigjet) {
+                resultsDiv.innerHTML += "<p><strong>" + lenda + ":</strong> " + pergjigjet[lenda] + "</p>";
+            }
+        }
     </script>
 </head>
 <body>
 
-<h2>Tabela e Lëndëve Mësimore dhe Preferencave</h2>
-<form>
+<h2>FORMULAR PËR PËRZGJEDHJEN E LËNDËVE</h2>
+<form onsubmit="mbledhPergjigjet(); return false;">
     <table id="tabela" border="1">
         <thead>
             <tr>
-                <th>Lëndë Mësimore</th>
-                <th>Preferenca (Numër)</th>
+                <th>LËNDËT ME ZGJEDHJE</th>
+                <th>RENDITJA</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Matematikë</td>
+                <td>MATEMATIKË</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Fizikë</td>
+                <td>FIZIKË</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Kimi</td>
+                <td>KIMI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Biologji</td>
+                <td>BIOLOGJI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Gjuhë Shqipe</td>
+                <td>TIK</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Historia</td>
+                <td>HISTORI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Gjeografi</td>
+                <td>GJEOGRAFI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Informatikë</td>
+                <td>SOCIOLOGJI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Gjuha Angleze</td>
+                <td>PSIKOLOGJI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Edukim Fizik</td>
+                <td>LETËRSI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Arti</td>
+                <td>ARTE</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Muzikë</td>
+                <td>TEKNOLOGJI</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
             <tr>
-                <td>Fizikë e Aplikuar</td>
+                <td>ED. FIZIK</td>
                 <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>Shkenca Kompjuterike</td>
-                <td>
-                    <input type="number" min="1" max="14" step="1" required oninput="kontrolloInput(event)">
+                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
         </tbody>
     </table>
     <br>
-    <button type="submit" onclick="return kontrolloPreferencat()">Dërgo</button>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdzDV0VUZtMDFlBYd-J957zmvuVURNgQRzSrrz0MvqnmBXBPg/viewform?embedded=true" width="640" height="248" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <button type="submit">DËRGO</button>
 </form>
+
+<div id="results" class="results"></div>
+
 </body>
 </html>
