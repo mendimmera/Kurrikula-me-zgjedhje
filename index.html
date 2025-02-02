@@ -48,6 +48,61 @@
         function kontrolloInput(e) {
             kontrolloPreferencat();
         }
+
+        // Funksioni që dërgon të dhënat në JotForm
+        async function dergoTeDhenatNeJotForm(event) {
+            event.preventDefault(); // Ndalon dërgimin tradicional të formës
+
+            if (!kontrolloPreferencat()) {
+                alert("Ju lutemi korrigjoni gabimet në formë.");
+                return;
+            }
+
+            // Merr të dhënat nga tabela
+            var tabela = document.getElementById("tabela");
+            var teDhenat = {};
+
+            for (var i = 1; i < tabela.rows.length; i++) {
+                var lenda = tabela.rows[i].cells[0].innerText;
+                var preference = tabela.rows[i].cells[1].getElementsByTagName("input")[0].value;
+                teDhenat[lenda] = preference;
+            }
+
+            // Krijo objektin për JotForm
+            const submission = {
+                "submission": {
+                    "1": JSON.stringify(teDhenat) // Dërgo të gjitha të dhënat si një string JSON
+                }
+            };
+
+            // Dërgo të dhënat në JotForm
+            const apiKey = '1ed6d597b88bfeadf9d78cfdc196e873'; // Zëvendëso me API Key tënd
+            const formId = '250272155534048'; // Zëvendëso me ID e formës së JotForm
+            const url = `https://api.jotform.com/form/${formId}/submissions?apikey=${apiKey}`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(submission),
+                });
+
+                if (response.ok) {
+                    alert('Të dhënat u dërguan me sukses në JotForm!');
+                    window.location.href = 'https://form.jotform.com/your-embed-form-id'; // Ridrejto në formën e embed-uar
+                } else {
+                    alert('Ndodhi një gabim gjatë dërgimit të të dhënave.');
+                }
+            } catch (error) {
+                console.error('Gabim:', error);
+                alert('Ndodhi një gabim gjatë dërgimit të të dhënave.');
+            }
+        }
+
+        // Lidh funksionin me formën
+        document.querySelector('form').addEventListener('submit', dergoTeDhenatNeJotForm);
     </script>
 </head>
 <body>
@@ -69,95 +124,12 @@
                     <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
                 </td>
             </tr>
-            <tr>
-                <td>FIZIKË</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>KIMI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>BIOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>TIK</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>HISTORI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>GJEOGRAFI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>SOCIOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>PSIKOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>LETËRSI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>ARTE</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>TEKNOLOGJI</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
-            <tr>
-                <td>ED. FIZIK</td>
-                <td>
-                    <input type="number" min="1" max="13" step="1" required oninput="kontrolloInput(event)">
-                    <div class="error">Gabim: Preferenca ka qenë e përdorur më parë.</div>
-                </td>
-            </tr>
+            <!-- Shto rreshtat e tjerë të tabelës këtu -->
         </tbody>
     </table>
     <br>
-    <button type="submit" onclick="return kontrolloPreferencat()">DËRGO</button>
+    <button type="submit">DËRGO</button>
 </form>
-<iframe aria-label='Lendet' frameborder="0" style="height:500px;width:99%;border:none;" src='https://forms.zohopublic.eu/mendimmeragm1/form/Lendet/formperma/iaKOR_Tra6YVBkXam9Xa7O0pFdOdCv5vZOF6r4MWmco'></iframe>
+
 </body>
 </html>
