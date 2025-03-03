@@ -73,7 +73,7 @@
 <body>
 
 <h2>FORMULAR PËR PËRZGJEDHJEN E LËNDËVE</h2>
-<form>
+<form id="myForm">
     <table id="tabela" border="1">
         <thead>
             <tr>
@@ -95,6 +95,26 @@
     <br>
     <button type="submit">DËRGO</button>
 </form>
-
+ <script>
+        document.getElementById("myForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            let formData = new FormData(this);
+            let object = {};
+            formData.forEach((value, key) => { object[key] = value });
+            
+            fetch("https://sheetdb.io/api/v1/ckk9cm7a774dk", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ data: object })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Të dhënat u ruajtën me sukses!");
+                this.reset();
+            })
+            .catch(error => console.error("Gabim:", error));
+        });
+    </script>
 </body>
 </html>
