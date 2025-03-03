@@ -68,41 +68,6 @@
                 teDhenat[lenda] = preference;
             }
 
-            // Krijo objektin për JotForm
-            const submission = {
-                "submission": {
-                    "1": JSON.stringify(teDhenat) // Dërgo të gjitha të dhënat si një string JSON
-                }
-            };
-
-            // Dërgo të dhënat në JotForm
-            const apiKey = 1ed6d597b88bfeadf9d78cfdc196e873; // Zëvendëso me API Key tënd
-            const formId = 250272155534048; // Zëvendëso me ID e formës së JotForm
-            const url = `https://api.jotform.com/form/${formId}/submissions?apikey=${apiKey}`;
-
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(submission),
-                });
-
-                if (response.ok) {
-                    alert('Të dhënat u dërguan me sukses në JotForm!');
-                    window.location.href = 'https://form.jotform.com/your-embed-form-id'; // Ridrejto në formën e embed-uar
-                } else {
-                    alert('Ndodhi një gabim gjatë dërgimit të të dhënave.');
-                }
-            } catch (error) {
-                console.error('Gabim:', error);
-                alert('Ndodhi një gabim gjatë dërgimit të të dhënave.');
-            }
-        }
-
-        // Lidh funksionin me formën
-        document.querySelector('form').addEventListener('submit', dergoTeDhenatNeJotForm);
     </script>
 </head>
 <body>
