@@ -424,7 +424,7 @@ F    <option value="11-F">11-F</option>
         var emriMbiemriPrindi = document.getElementById("emriMbiemriPrindi").value;
 	var NrPersonalNxenesi = document.getElementById("NrPersonalNxenesi").value;
 
-        if (emriMbiemriNxenesi === "" || klasa === "" || emriMbiemriPrindi === "" || NrPersonalNxenesi === "") {
+        if (emriMbiemriNxenesi === "" || klasa === "" || emriMbiemriPrindi === "" || NrPersonalNxenesi.length <> "10") {
             // Shfaq mesazhin e gabimit nëse ka fusha bosh
             document.getElementById("page1Error").style.display = "block";
         } else {
