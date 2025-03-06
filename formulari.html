@@ -178,7 +178,7 @@
             </div>
 	    <div class="form-group">
                 <label for="NrPersonalNxenesi">Numri Personal i Nxënësit:</label>
-                <input type="text" id="NrPersonalNxenesi" name="NrPersonalNxenesi" placeholder="A12345678B" required>
+                <input type="text" id="NrPersonalNxenesi" name="nrPersonalNxenesi" placeholder="A12345678B" required>
             </div>
             <div class="form-group">
                 <label for="klasa">Klasa:</label>
@@ -422,6 +422,7 @@ F    <option value="11-F">11-F</option>
         var emriMbiemriNxenesi = document.getElementById("emriMbiemriNxenesi").value;
         var klasa = document.getElementById("klasa").value;
         var emriMbiemriPrindi = document.getElementById("emriMbiemriPrindi").value;
+	var NrPersonalNxenesi = document.getElementById("NrPersonalNxenesi").value;
 
         if (emriMbiemriNxenesi === "" || klasa === "" || emriMbiemriPrindi === "" || NrPersonalNxenesi === "") {
             // Shfaq mesazhin e gabimit nëse ka fusha bosh
