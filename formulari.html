@@ -200,6 +200,7 @@ F    <option value="11-F">11-F</option>
                 <input type="text" id="emriMbiemriPrindi" name="emriMbiemriPrindi" placeholder="Emri Mbiemri" required>
             </div>
             <div class="error-message" id="page1Error">Ju lutemi plotësoni të gjitha fushat përpara se të vazhdoni.</div>
+	    <div class="error-message" id="page11Error">JNumri personal duhet te ketë 10 karaktere.</div>
             <div class="button-container">
                 <button type="button" onclick="nextPage()">Vazhdo</button>
             </div>
@@ -426,7 +427,7 @@ F    <option value="11-F">11-F</option>
 
         if (emriMbiemriNxenesi === "" || klasa === "" || emriMbiemriPrindi === "" || NrPersonalNxenesi.length !== 10) {
             // Shfaq mesazhin e gabimit nëse ka fusha bosh
-            document.getElementById("page1Error").style.display = "block";
+            document.getElementById("page11Error").style.display = "block";
         } else {
             // Fshi mesazhin e gabimit dhe kalo në faqen e dytë
             document.getElementById("page1Error").style.display = "none";
