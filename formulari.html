@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular për lëndët me zgjedhje klasa 12</title>
+    <style>
+        /* Stilizimi i përgjithshëm */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: moccasin;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+        }
+
+        .page {
+            padding: 20px;
+            display: none; /* Fillimisht të gjitha faqet janë të fshehura */
+        }
+
+        .page.active {
+            display: block; /* Faqja aktive shfaqet */
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+	 .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: papayawhip;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none; /* Fillimisht i fshehur */
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 12px;
+            display: none; /* Fillimisht i fshehur */
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: limegreen;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container button[type="button"] {
+            background-color: dodgerblue;
+        }
+
+        .button-container button[type="button"]:hover {
+            background-color: #5a6268;
+        }
+	.input-wrapper {
+            display: flex;
+            gap: 10px;
+	    margin-bottom: 10px;
+	    
+        }
+        .input-box {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+	    box-sizing: border-box;
+        }
+        .output {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            .form-group input {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .button-container button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="page active" id="page1">
+        <h3 style="text-align:center;">TË DHËNAT E NXËNËSIT </h3>
+<form id="myForm">
+    
+	    <p style = "color: #555; font-size: 14px;">Emri dhe Mbiemri i Nxënësit:</p>
+            <div class="input-wrapper">
+             
+                <input type="text" id="emrin" class="input-box" placeholder="Emri" oninput="updateText()">
+                <input type="text" id="mbiemrin" class="input-box" placeholder="Mbiemri" oninput="updateText()">
+            </div>
+	    <div class="form-group">
+                <label for="NrPersonalNxenesi">Numri Personal i Nxënësit:</label>
+                <input type="text" id="NrPersonalNxenesi" name="nrPersonalNxenesi" placeholder="A12345678B" required>
+            </div>
+            <div class="form-group">
+                <label for="klasa">Klasa:</label>
+		<select name="Klasa" id="klasa">
+    <option value="" disabled selected>Zgjidh klasën nga lista</option>
+    <option value="11-A">11-A</option>
+    <option value="11-B">11-B</option>
+    <option value="11-C">11-C</option>
+    <option value="11-D">11-D</option>
+    <option value="11-E">11-E</option>
+F    <option value="11-F">11-F</option>
+    <option value="11-G">11-G</option>
+    <option value="11-H">11-H</option>
+  </select>
+
+            </div>
+		<p style = "color: #555; font-size: 14px;">Emri dhe Mbiemri i Prindit ose Kujdestarit Ligjor:</p>
+            	<div class="input-wrapper">
+             
+                <input type="text" id="emri" class="input-box" placeholder="Emri" oninput="updateText()">
+                <input type="text" id="mbiemri" class="input-box" placeholder="Mbiemri" oninput="updateText()">
+            </div>
+            <div class="error-message" id="page1Error">Ju lutemi plotësoni të gjitha fushat përpara se të vazhdoni.</div>
+	    <div class="error-message" id="page11Error">Numri personal duhet te ketë 10 karaktere.</div>
+            <div class="button-container">
+                <button type="button" onclick="nextPage()">Vazhdo</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="page" id="page2">
+        <h2>Tabela e Lëndëve me zgjedhje</h2>
+	<p style="text-align:center;">Për secilën nga lëndët në tabelë vendosni një preferencë nga 1 në 13 (1 - lënda më e preferuar, 13 - më pak e preferuara)</p> 
+        <div class="table-container">
+            <table id="tabela" border="1">
+                <thead>
+                    <tr>
+                        <th>LËNDËT ME ZGJEDHJE</th>
+                        <th>RENDITJA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>MATEMATIKË E AVANCUAR</td>
+                    <td>
+                        <input type="number" name="notaMatematike" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>FIZIKË</td>
+                    <td>
+                        <input type="number" name="notaFizike" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+	        <tr>
+                    <td>KIMI</td>
+                    <td>
+                        <input type="number" name="notaKimi" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>BIOLOGJI</td>
+                    <td>
+                        <input type="number" name="notaBiologji" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>TIK</td>
+                    <td>
+                        <input type="number" name="notaTik" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>LETËRSI</td>
+                    <td>
+                        <input type="number" name="notaLetersi" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+	        <tr>
+                    <td>SOCIOLOGJI</td>
+                    <td>
+                        <input type="number" name="notaSociologji" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>PSIKOLOGJI</td>
+                    <td>
+                        <input type="number" name="notaPsikologji" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>HISTORI</td>
+                    <td>
+                        <input type="number" name="notaHistori" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>GJEOGRAFI</td>
+                    <td>
+                        <input type="number" name="notaGjeografi" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>TEKNOLOGJI</td>
+                    <td>
+                        <input type="number" name="notaTeknologji" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>ARTE</td>
+                    <td>
+                        <input type="number" name="notaArte" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+		<tr>
+                    <td>EDUKIM FIZIK</td>
+                    <td>
+                        <input type="number" name="notaEdukim_fizik" min="1" max="13" step="1" required oninput="kontrolloInput(this)">
+                        <div class="error">Gabim: Vlera duhet të jetë nga 1 në 13.</div>
+                        <div class="error">Gabim: Vlera është përdorur më parë.</div>
+                    </td>
+                </tr>
+                    <!-- Shto më shumë lëndë sipas nevojës -->
+                </tbody>
+            </table>
+        </div>
+        <div class="error-message" id="page2Error">Ju lutemi plotësoni të gjitha fushat në tabelë përpara se të dërgoni formën.</div>
+        <div class="button-container">
+            <button type="button" onclick="prevPage()">Kthehu</button>
+            <button type="submit" form="myForm">DËRGO</button>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+    // Funksioni për të kontrolluar nëse emri i nxënësit ekziston tashmë në Google Sheet
+    
+    async function kontrolloNrPersonal(NrPersonalNxenesi) {
+        try {
+            const response = await fetch('https://sheetdb.io/api/v1/jf9jn8g9mqnjv');
+            const data = await response.json();
+            const ekziston = data.some(entry => entry["Numri personal i nxënësit"] === NrPersonalNxenesi);
+            return ekziston;
+        } catch (error) {
+            console.error("Gabim gjatë kontrollimit të të dhënave:", error);
+            return false;
+        }
+    }
+     async function kontrolloEmriNxenesit(emrin) {
+        try {
+            const response = await fetch('https://sheetdb.io/api/v1/jf9jn8g9mqnjv');
+            const data = await response.json();
+            const ekziston = data.some(entry => entry["Emri i Nxënësit"] === emrin);
+            return ekziston;
+        } catch (error) {
+            console.error("Gabim gjatë kontrollimit të të dhënave:", error);
+            return false;
+        }
+    }
+    async function kontrolloMbiemriNxenesit(mbiemrin) {
+        try {
+            const response = await fetch('https://sheetdb.io/api/v1/jf9jn8g9mqnjv');
+            const data = await response.json();
+            const ekziston = data.some(entry => entry["Mbiemri i Nxënësit"] === mbiemrin);
+            return ekziston;
+        } catch (error) {
+            console.error("Gabim gjatë kontrollimit të të dhënave:", error);
+            return false;
+        }
+    }
+
+    // Funksioni për të dërguar të dhënat në Google Sheet
+    async function dergoTeDhenat() {
+        // Mbledh të dhënat nga faqja e parë
+        var emriNxenesi = document.getElementById("emrin").value;
+	var mbiemriNxenesi = document.getElementById("mbiemrin").value;
+	var NrPersonalNxenesi = document.getElementById("NrPersonalNxenesi").value;
+        var klasa = document.getElementById("klasa").value;
+        var emriPrindi = document.getElementById("emri").value;
+	var mbiemriPrindi = document.getElementById("mbiemri").value;
+
+        // Mbledh të dhënat nga tabela në faqen e dytë
+        var matematika = document.querySelector('input[name="notaMatematike"]').value;
+        var fizika = document.querySelector('input[name="notaFizike"]').value;
+	var kimia = document.querySelector('input[name="notaKimi"]').value;
+	var biologjia = document.querySelector('input[name="notaBiologji"]').value;
+	var tiku = document.querySelector('input[name="notaTik"]').value;
+	var letersia = document.querySelector('input[name="notaLetersi"]').value;
+	var sociologjia = document.querySelector('input[name="notaSociologji"]').value;
+	var psikologjia = document.querySelector('input[name="notaPsikologji"]').value;
+	var historia = document.querySelector('input[name="notaHistori"]').value;
+	var gjeografia = document.querySelector('input[name="notaGjeografi"]').value;
+	var teknologjia = document.querySelector('input[name="notaTeknologji"]').value;
+	var artet = document.querySelector('input[name="notaArte"]').value;
+	var edukimi_fizik = document.querySelector('input[name="notaEdukim_fizik"]').value;
+
+        // Krijo një objekt me të dhënat
+        var teDhenat = {
+            "Emri i Nxënësit": emriNxenesi,
+	    "Mbiemri i Nxënësit": mbiemriNxenesi,
+	    "Numri personal i nxënësit": NrPersonalNxenesi,
+            "Klasa": klasa,
+            "Emri i Prindit": emriPrindi,
+	    "Mbiemri i Prindit": mbiemriPrindi,
+            "Matematikë": matematika,
+            "Fizikë": fizika,
+	    "Kimi":kimia,
+	    "Biologji":biologjia,
+	    "Tik":tiku,
+	    "Letërsi":letersia,
+	    "Sociologji":sociologjia,
+	    "Psikologji":psikologjia,
+	    "Histori":historia,
+	    "Gjeografi":gjeografia,
+	    "Teknologji":teknologjia,
+	    "Arte":artet,
+	    "Edukim Fizik":edukimi_fizik
+        };
+
+        // Dërgo të dhënat në SheetDB
+        try {
+            const response = await fetch('https://sheetdb.io/api/v1/jf9jn8g9mqnjv', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: teDhenat })
+            });
+
+            const result = await response.json();
+            if (result.created === 1) {
+                alert("Të dhënat u dërguan me sukses!");
+                document.getElementById("myForm").reset(); // Reset formën
+                window.location.href = 'dalja.html'; // Ridrejto në homepage
+            } else {
+                alert("Gabim gjatë dërgimit të të dhënave!");
+            }
+        } catch (error) {
+            console.error("Gabim:", error);
+            alert("Gabim gjatë dërgimit të të dhënave!");
+        }
+    }
+
+    // Funksioni për të kaluar në faqen e dytë
+    function nextPage() {
+        // Kontrollo nëse të gjitha fushat në faqen e parë janë plotësuar
+        var emriNxenesi = document.getElementById("emrin").value;
+	var mbiemriNxenesi = document.getElementById("mbiemrin").value;
+        var klasa = document.getElementById("klasa").value;
+        var emriPrindi = document.getElementById("emri").value;
+	var mbiemriPrindi = document.getElementById("mbiemri").value;
+	var NrPersonalNxenesi = document.getElementById("NrPersonalNxenesi").value;
+
+        if (emriNxenesi === "" || mbiemriNxenesi === "" || klasa === "" || emriPrindi === "" || mbiemriPrindi === "" || NrPersonalNxenesi === "") {
+            // Shfaq mesazhin e gabimit nëse ka fusha bosh
+            document.getElementById("page1Error").style.display = "block";
+	    document.getElementById("page11Error").style.display = "none";
+        } else if(NrPersonalNxenesi.length !== 10 & NrPersonalNxenesi !== ""){
+	document.getElementById("page1Error").style.display = "none";
+	document.getElementById("page11Error").style.display = "block";
+	}
+     else
+ {
+            // Fshi mesazhin e gabimit dhe kalo në faqen e dytë
+            document.getElementById("page1Error").style.display = "none";
+	    document.getElementById("page11Error").style.display = "none";
+            document.getElementById("page1").classList.remove("active");
+            document.getElementById("page2").classList.add("active");
+        }
+    }
+
+    // Funksioni për të kthyer në faqen e parë
+    function prevPage() {
+        document.getElementById("page2").classList.remove("active");
+        document.getElementById("page1").classList.add("active");
+    }
+
+    // Funksioni që kontrollon vlerat që futen në formular
+    function kontrolloInput(inputElement) {
+        var errorMessages = inputElement.parentElement.querySelectorAll(".error");
+        var allValues = getAllValues(); // Merr të gjitha vlerat nga formulari
+        var inputValue = inputElement.value;
+        var errorMessage1 = errorMessages[0]; // Mesazhi për vlerën më të madhe se 13
+        var errorMessage2 = errorMessages[1]; // Mesazhi për vlerat e përsëritura
+
+        // Kontrollo nëse vlera është më e madhe se 13
+        if (parseInt(inputValue) > 13 || (inputValue) < 1 ) {
+            errorMessage1.style.display = "block"; // Trego mesazhin për vlerën më të madhe se 13
+            inputElement.style.borderColor = "red"; // Vendos kufirin e kuq për fushën
+            errorMessage2.style.display = "none"; // Fshi mesazhin për vlerën e përsëritur
+        } 
+        // Kontrollo nëse vlera është e përsëritur
+        else if (allValues.filter(value => value == inputValue).length > 1) {
+            errorMessage2.style.display = "block"; // Trego mesazhin për vlerën e përsëritur
+            inputElement.style.borderColor = "red"; // Vendos kufirin e kuq për fushën
+            errorMessage1.style.display = "none"; // Fshi mesazhin për vlerën më të madhe se 13
+        } 
+        else {
+            errorMessage1.style.display = "none"; // Fshi mesazhin për vlerën më të madhe se 13
+            errorMessage2.style.display = "none"; // Fshi mesazhin për vlerën e përsëritur
+            inputElement.style.borderColor = ""; // Fshi kufirin e kuq
+        }
+    }
+
+    // Funksioni që merr të gjitha vlerat e futur nga tabela
+    function getAllValues() {
+        var tabela = document.getElementById("tabela");
+        var values = [];
+
+        for (var i = 1; i < tabela.rows.length; i++) {
+            var preferenceInput = tabela.rows[i].cells[1].getElementsByTagName("input")[0];
+            var preferenceValue = preferenceInput.value;
+            
+            if (preferenceValue !== "") {
+                values.push(preferenceValue);
+            }
+        }
+        return values;
+    }
+
+    // Modifiko funksionin e dërgimit të formës
+    document.getElementById("myForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+	// Kontrollo nëse emri i nxënësit ekziston tashmë
+        var NrPersonalNxenesi = document.getElementById("NrPersonalNxenesi").value;
+	var emriNxenesi = document.getElementById("emrin").value;
+	var mbiemriNxenesi = document.getElementById("mbiemrin").value;
+	const ekzistoni = await kontrolloNrPersonal(NrPersonalNxenesi);
+	const ekziston = await kontrolloEmriNxenesit(emriNxenesi);
+	const ekzistonu = await kontrolloMbiemriNxenesit(mbiemriNxenesi);
+        if ((ekziston && ekzistonu) || ekzistoni) {
+            alert("Ky nxënës e ka plotësuar formularin !");
+            return;
+        }
+        var tabela = document.getElementById("tabela");
+        var isValid = true;
+        var hasEmptyFields = false;
+
+        // Kontrollo nëse ka fusha boshe në tabelë
+        for (var i = 1; i < tabela.rows.length; i++) {
+            var preferenceInput = tabela.rows[i].cells[1].getElementsByTagName("input")[0];
+            if (preferenceInput.value === "") {
+                hasEmptyFields = true;
+                break;
+            }
+        }
+
+        if (hasEmptyFields) {
+            // Shfaq mesazhin e gabimit nëse ka fusha boshe
+            document.getElementById("page2Error").style.display = "block";
+            isValid = false;
+        } else {
+            document.getElementById("page2Error").style.display = "none";
+        }
+
+        // Kontrollo të gjitha inputet për të siguruar që nuk ka gabime
+        for (var i = 1; i < tabela.rows.length; i++) {
+            var preferenceInput = tabela.rows[i].cells[1].getElementsByTagName("input")[0];
+            var errorMessages = tabela.rows[i].cells[1].getElementsByClassName("error");
+            var errorMessage1 = errorMessages[0]; // Mesazhi për vlerën më të madhe se 13
+            var errorMessage2 = errorMessages[1]; // Mesazhi për vlerat e përsëritura
+
+            // Kontrollo nëse vlera është më e madhe se 13
+            if (parseInt(preferenceInput.value) > 13) {
+                errorMessage1.style.display = "block";
+                preferenceInput.style.borderColor = "red";
+                isValid = false;
+            }  
+            // Kontrollo nëse vlera është e përsëritur
+            else if (getAllValues().filter(value => value == preferenceInput.value).length > 1) {
+                errorMessage2.style.display = "block";
+                preferenceInput.style.borderColor = "red";
+                isValid = false;
+            } 
+            else {
+                errorMessage1.style.display = "none";
+                errorMessage2.style.display = "none";
+                preferenceInput.style.borderColor = "";
+            }
+        }
+
+        if (isValid && !hasEmptyFields) {
+            dergoTeDhenat(); // Dërgo të dhënat në Google Sheet
+        } else {
+            alert("Ju lutemi kontrolloni të dhënat e futura!");
+        }
+    });
+</script>
+
+</body>
+</html>
